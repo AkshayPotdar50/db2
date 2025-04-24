@@ -1,4 +1,4 @@
-package com.sprint.three.intro.multithread;
+package com.sprint.three.intro.string;
 
 import java.util.*;
 import java.util.function.Function;
@@ -98,6 +98,8 @@ public class Test1 {
 
     // 4. Count vowels and consonants
     public static void countVowelsAndConsonants(String input) {
+        /*Loop through chars, use switch on vowels.
+         Ignore non-letters: input.replaceAll("[^a-zA-Z]", "")*/
         int vowels = 0, consonants = 0;
         input = input.toLowerCase().replaceAll("[^a-z]", "");
         for (char c : input.toCharArray()) {
@@ -144,6 +146,15 @@ public class Test1 {
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
         return count.entrySet().stream().filter(e -> e.getValue() == 1).map(Map.Entry::getKey).findFirst().orElse(null);
+    }
+
+
+
+    public static Character firstNonRepeatation(String str){
+        Map<Character, Long> count= str.chars()
+                .mapToObj(c->(char)c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
+        return count.entrySet().stream().filter(e->e.getValue() ==1).map(Map.Entry::getKey).findFirst().orElse(null);
     }
 
 
